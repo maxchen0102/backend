@@ -26,7 +26,8 @@ class Person (Base):
         return f"({self.ssn}){self.firstname}({self.gender}{self.age})"
     
 # 建立連線    
-engine=create_engine("sqlite:///mydb2.sqlite",echo=True)
+connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
+engine=create_engine(connection_string)
 # 建立table 
 Base.metadata.create_all(bind=engine) 
 
