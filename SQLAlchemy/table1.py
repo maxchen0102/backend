@@ -7,7 +7,6 @@ Base= declarative_base()
 
 class Person(Base):
     __tablename__ ="people"
-    
     ssn =Column("ssn",Integer,primary_key=True ) # ssn 是python 裡面的使用名稱 
     firstname=Column("firstname",String)  # "firstname",是db 裡面的欄位名稱 
     gender=Column("gender",CHAR)
@@ -22,7 +21,6 @@ class Person(Base):
     
 #這樣才可以回傳string 給我們做debug 
     def __repr__(self):
-        
         return f"({self.ssn}){self.firstname}({self.gender}{self.age})"
     
 
@@ -39,7 +37,6 @@ class Thing(Base):
         self.owner=owner
 
     def __repr__(self):
-        
         return f"({self.tid}){self.description} ownerd by {self.owner}"
     
 # 建立連線    
