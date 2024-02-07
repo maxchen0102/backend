@@ -1,42 +1,18 @@
-from sqlalchemy import create_engine,ForeignKey ,Column,String,Integer,CHAR 
-#from sqlalchemy.ext.declarative import declarative_base 
-from sqlalchemy.orm import sessionmaker,declarative_base
 
+from sqlalchemy import create_engine
 
-Base= declarative_base()
+from sqlalchemy.orm import sessionmaker
 
-class Person(Base):
-    __tablename__ ="people"
-    
-    ssn =Column("ssn",Integer,primary_key=True ) # ssn 是python 裡面的使用名稱 
-    firstname=Column("firstname",String)  # "firstname",是db 裡面的欄位名稱 
-    gender=Column("gender",CHAR)
-    age=Column("age",Integer)
-    
+from table1 import Person,Thing
 
-# 建立物件的時候，可以產生instance 
-    def __init__(self,ssn,first,gender,age):
-        self.ssn=ssn 
-        self.firstname=first
-        self.gender=gender
-        self.age=age
-    
-#這樣才可以回傳string 給我們做debug 
-    def __repr__(self):
-        
-        return f"({self.ssn}){self.firstname}({self.gender}{self.age})"
-    
-# 建立連線    
+# Establish connection
 connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
-engine=create_engine(connection_string, echo=False)
-# 建立table 
-Base.metadata.create_all(bind=engine) 
+engine = create_engine(connection_string, echo=True)
 
-# (建立資料庫操作橋梁->config要哪個engine )
-Session=sessionmaker(bind=engine)
+Session = sessionmaker(bind=engine)
+session = Session()
 
-# 實體化
-session=Session()
+
 
 # person=Person(123,"re",'m',12)
 # session.add(person)
@@ -50,7 +26,16 @@ session=Session()
 # session.add(p3)
 # session.commit()
 
+p1=Person(2,"chris","m",35)
+p2=Person(3,"max","m",15)
 
-result = session.query(Person).all()
-for i in result:
-    print(i)
+session.add(p1)
+session.add(p2)
+session.commit()
+
+t1=Thing(1,"cat",p1.ssn)
+t2=Thing(2,"lattop",p2.ssn)
+
+session.add(t1)
+session.add(t2)
+session.commit()

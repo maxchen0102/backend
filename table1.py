@@ -13,7 +13,6 @@ class Person(Base):
     gender=Column("gender",CHAR)
     age=Column("age",Integer)
     
-
 # 建立物件的時候，可以產生instance 
     def __init__(self,ssn,first,gender,age):
         self.ssn=ssn 
@@ -26,18 +25,28 @@ class Person(Base):
         
         return f"({self.ssn}){self.firstname}({self.gender}{self.age})"
     
+
+class Thing(Base): 
+    __tablename__= "things"
+
+    tid=Column("tid",Integer,primary_key=True) 
+    description=Column('description',String)
+    owner =Column(Integer,ForeignKey("people.ssn"))
+
+    def __init__(self,tid,description,owner):
+        self.tid=tid 
+        self.description=description
+        self.owner=owner
+
+    def __repr__(self):
+        
+        return f"({self.tid}){self.description} ownerd by {self.owner}"
+    
 # 建立連線    
 connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine=create_engine(connection_string, echo=False)
 # 建立table 
 Base.metadata.create_all(bind=engine) 
-
-# (建立資料庫操作橋梁->config要哪個engine )
-Session=sessionmaker(bind=engine)
-
-# 實體化
-session=Session()
-
 
 
 
