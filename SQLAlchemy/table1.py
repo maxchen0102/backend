@@ -42,7 +42,8 @@ class Thing(Base):
 # 建立連線    
 connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine=create_engine(connection_string, echo=False)
-# 建立table 
+
+#建立table 
 Base.metadata.create_all(bind=engine) 
 
 
