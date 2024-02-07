@@ -1,53 +1,31 @@
-from sqlalchemy import create_engine,ForeignKey ,Column,String,Integer,CHAR 
-#from sqlalchemy.ext.declarative import declarative_base 
-from sqlalchemy.orm import sessionmaker,declarative_base
 
-Base= declarative_base()
+from sqlalchemy import create_engine
 
-class Person (Base):
-    __tablename__ ="people"
-    
-    ssn =Column("ssn",Integer,primary_key=True ) # ssn 是python 裡面的使用名稱 
-    firstname=Column("firstname",String)  # "firstname",是db 裡面的欄位名稱 
-    gender=Column("gender",CHAR)
-    age=Column("age",Integer)
-    
+from sqlalchemy.orm import sessionmaker
 
-# 建立物件的時候，可以產生instance 
-    def __init__(self,ssn,first,gender,age):
-        self.ssn=ssn 
-        self.firstname=first
-        self.gender=gender
-        self.age=age
-    
-#這樣才可以回傳string 給我們做debug 
-    def __repr__(self):
-        
-        return f"({self.ssn}){self.firstname}({self.gender}{self.age})"
-    
-# 建立連線    
-engine=create_engine("sqlite:///mydb2.sqlite",echo=True)
-# 建立table 
-Base.metadata.create_all(bind=engine) 
+from table1 import Person,Thing
 
-# (建立資料庫操作橋梁->config要哪個engine )
-Session=sessionmaker(bind=engine)
+# Establish connection
+connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
+engine = create_engine(connection_string, echo=True)
 
-# 實體化
-session=Session()
+Session = sessionmaker(bind=engine)
+session = Session()
 
-person=Person(123,"re",'m',12)
 
-session.add(person)
-session.commit()
+row=session.query(Person,Thing).filter(Thing.owner==Person.ssn).filter(Person.firstname=="chris").first()
+if row:
+    print("data=",row[0])  # Accessing column 'ssn'
+  
 
-p1=Person(1,"chris",'m',12)
 
-p2=Person(23,"max",'m',121)
+# results=session.query(Person).all()
+# for row in results: 
+#     print("ssn=", row.ssn ,"|",row.firstname,"|",row.gender,"|",row.age)
 
-p3=Person(12,"bob",'m',122)
+# a =session.query(Person).filter(Person.firstname=="chris").all()
+# print(type(a))
 
-session.add(p1)
-session.add(p2)
-session.add(p3)
-session.commit()
+# for i in a : 
+#     print ("name=" ,i.firstname)
+#     print(i)
