@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine,ForeignKey ,Column,String,Integer,CHAR 
+from sqlalchemy import create_engine,ForeignKey ,Column,String,Integer,CHAR ,Date,UnicodeText
 #from sqlalchemy.ext.declarative import declarative_base 
 from sqlalchemy.orm import sessionmaker,declarative_base
 
@@ -38,7 +38,30 @@ class Thing(Base):
 
     def __repr__(self):
         return f"({self.tid}){self.description} ownerd by {self.owner}"
-    
+
+class User(Base):
+    __tablename__='user'
+
+    userID=Column(Integer,primary_key=True)
+    userName=Column(String,nullable=False) 
+    #birthDay=Column(Date) 
+    nickName=Column(UnicodeText)
+    test=Column(Integer)
+
+    def __init__(self,userID,userName,nickName) : 
+        self.userID=userID
+        self.userName=userName
+        self.nickName=nickName
+
+
+class FID(Base):
+    __tablename__="fid"
+    userID=Column(Integer,primary_key=True)
+
+    def __init__(self,userID):
+        self.userID=userID
+
+
 # 建立連線    
 connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine=create_engine(connection_string, echo=False)
