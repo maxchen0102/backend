@@ -10,18 +10,19 @@ engine_url = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine = create_engine(engine_url, echo=True)
 
 
-class AllData(Base):
-    __tablename__ = "alldata"
+class Data(Base):
+    __tablename__ = "data"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title2222 = Column(String(100))
-    content = Column(TEXT)
-    picture = Column(String(8182))  # Chrome 網址長度上限
-    category = Column(String(100))
-    youtube = Column(String(8182))  # Chrome 網址長度上限
-    slideshare = Column(String(8182))  # Chrome 網址長度上限
-    publish_time = Column(DateTime)
-    update_time = Column(DateTime)
-
+    Seq = Column(Integer)
+    DateListed = Column(String(100))
+    year = Column(String(8182))  # Chrome 網址長度上限
+    level = Column(String(100))
+    identity = Column(String(8182))  # Chrome 網址長度上限
+    gentle = Column(String(8182))  # Chrome 網址長度上限
+    gentle_code = Column(String)
+    register_number = Column(String)
+    test_number = Column(String)
+    pass_number = Column(String)
 
 def create_table():
     Base.metadata.create_all(engine)
