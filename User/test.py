@@ -1,11 +1,12 @@
 import requests
-
+import json 
 from requests import ConnectionError,HTTPError,Timeout
 try : 
     url="https://httpbin.org/post"
     url_auth='https://httpbin.org/basic-auth/1111/1111'
     url_delay= "https://httpbin.org/post/delay/5"
     url_pyramid="http://localhost:6543/hello"
+    url_test="https://sme.moeasmea.gov.tw/startup/upload/opendata/gov_infopack_opendata.json"
     params ={
         'id':12,
         "name": "chris",
@@ -19,9 +20,10 @@ try :
     }
 
     auth=("1111","1111")
-    res = requests.get(url_pyramid)
+    res = requests.get(url_test)
+    print(json.loads(res.text))
 
-    print(res.text)
+    # print(res.text)
     print(res.url)
     #print(res.json())
     #print(res.headers)
