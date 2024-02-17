@@ -1,27 +1,30 @@
+from table2 import create_session
+from table2 import AllData
+import requests
+import json
+from datetime import datetime
 
-from sqlalchemy import create_engine
+url = "https://sme.moeasmea.gov.tw/startup/upload/opendata/gov_infopack_opendata.json"
+res = requests.get(url)
+datas = json.loads(res.text)
 
-from sqlalchemy.orm import sessionmaker
-
-from table1 import Person,Thing
-
-# Establish connection
-connection_string = "postgresql://postgres:postgres@127.0.0.1:5432/test"
-engine = create_engine(connection_string, echo=True)
-
-Session = sessionmaker(bind=engine)
-session = Session()
+session = create_session()
 
 
-# row=session.query(Person,Thing).filter(Thing.owner==Person.ssn).filter(Person.firstname=="chris").first()
-# if row:
-#     print("data=",row[0])  # Accessing column 'ssn'
-  
+for item in datas:
+    data_obj = {
+        "title": item["標題"],
+        "content": item["內容"],
+        "picture": item["主圖"],
+        "category": item["分類"],
+        "youtube": item["youtube嵌入代碼"],
+        "slideshare": item["slideshare嵌入代碼"],
+        "publish_time": datetime.strptime(item["建立時間"], "%Y%m%d%H%M%S"),
+        "update_time": datetime.strptime(item["修改時間"], "%Y%m%d%H%M%S")
+    }
+    session = create_session()
 
-x= session.query(Person).get(3) 
-print(type(x))
-print(x)
+    session.add(AllData(**data_obj))
 
-x =session.get(Person,2)
-print(x)
-print(x.ssn)
+    session.commit()
+    session.close()
