@@ -15,10 +15,24 @@ def my_view(request):
     return {'one': one, 'project': 'myServer'}
 
 @view_config(route_name='hello', renderer='json')
-def hello_world(request):
+def hello_world(request ):
     print('Incoming request')
-    data = {"key":"chris"}
+    data = {"key" : "chris"}
+    data2 = request.json_body
+    name = data2.get('name')
+    name=1
+    print(name)
+    a=1
+    b=2
+    d=a+b
+    data["d"] = d
     return data
+
+
+
+
+
+
 
 db_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem

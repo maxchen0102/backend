@@ -10,8 +10,6 @@ Base = declarative_base()
 engine_url = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine = create_engine(engine_url, echo=True)
 
-
-
 class Test(Base):
     __tablename__ = "test"
     id = Column(Integer, primary_key=True, autoincrement=True)
