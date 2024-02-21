@@ -8,6 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import ARRAY
 import mixins
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 engine_url = "postgresql://postgres:postgres@127.0.0.1:5432/test"
@@ -20,6 +21,7 @@ class Post(Base) :
     post_title=Column(String)
     post_context=Column(String)
     Owner_id=Column(Integer,ForeignKey("users.id",ondelete="CASCADE"))
+    user=relationship("User")
 
 class User(Base):
     __tablename__="users" 
@@ -28,8 +30,24 @@ class User(Base):
     author=Column(String)  
     author_email=Column(String)
     author_password=Column(String)
+    # post=relationship('Post',back_populates='user')
 
 
+class Parent(Base):
+    __tablename__ = "parent_table"
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    
+    ill_child=relationship(
+        "Child",
+        primaryjoin="and_(Parent.id==Child.parent_id,Child.illness==1)",
+    )
+
+class Child(Base):
+    __tablename__ = "child_table"
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    child_name=Column(String)
+    illness=Column(Integer)
+    parent_id = Column(Integer, ForeignKey("parent_table.id"))
 
 def create_table():
     Base.metadata.create_all(engine)

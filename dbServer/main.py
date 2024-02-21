@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from pprint import pprint
 import  csv 
-from table4 import Post, User
+from table4 import Post, User,Parent,Child
 
 
 # # Open the CSV file and read its contents
@@ -42,11 +42,11 @@ session = create_session()
 # session.close()
 
 
-post_data_obj={
-    'post_title':'okok',
-    'post_context':'qwec23123qwea',
-    'Owner_id':1
-}
+# post_data_obj={
+#     'post_title':'okok',
+#     'post_context':'qwec23123qwea',
+#     'Owner_id':1
+# }
 
 # post1=Post(**post_data_obj)
 # session.add(post1)
@@ -66,10 +66,50 @@ post_data_obj={
 # # 关闭会话
 # session.close()
 
-query=session.query(User,Post).join(Post,User.id==Post.Owner_id).all()
 
-for user, post in query:
-    print("User:", user.id, user.author, user.author_email)
-    print("Post:", post.post_id, post.post_title, post.post_context, post.Owner_id)
+# res=session.query(Post).all()
+
+# for item in res : 
+#     print(item.user.author)
 
 
+# res = session.query(Post, User).join(Post, Post.Owner_id == User.id).all()
+
+# for post,user in res:
+#     print(post.post_id,end=" ")
+#     print(post.post_title,end=" ")
+#     print(post.post_context,end=" ")
+#     print(post.Owner_id,end=" ")
+#     print(user.id,end=" ")
+#     print(user.author,end=" ")
+#     print(user.author_email,end=" ")
+#     print(user.author_password,end=" ")
+
+
+
+# session=create_session()
+
+# session.add(Parent())
+# session.commit()
+
+# data_obj={
+#     'child_name':'kariew', 
+#     'illness':0,
+#     'parent_id':1 
+# }
+
+# session.add(Child(**data_obj))
+# session.commit()
+
+# pareant=Parent()
+# session.add(pareant)
+# session.commit()
+
+parents_with_ill_children = session.query(Parent).filter(Parent.ill_child.any()).all()
+for parent in parents_with_ill_children:
+    print("Parent ID:", parent.id)
+    print("Ill Children:")
+    for ill_child in parent.ill_child:
+        print("\tChild ID:", ill_child.id)
+        print("\tChild Name:", ill_child.child_name)
+        print("\tChild Illness:", ill_child.illness)
