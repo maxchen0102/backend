@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd81146-4def-4a0e-ab88-c9aa512a8f73" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../User/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../User/test1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dbServer/table_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dbServer/table_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myServer/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/myServer/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myServer/views/default.py" beforeDir="false" afterPath="$PROJECT_DIR$/myServer/views/default.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2cfOMFctEA6Fvp4I47PvnwXXSKS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,7 +33,7 @@
     "Pyramid server.myServer.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "建立server",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/chris.chen/test1/vue-cli-demo/backend/myServer/production.ini",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -98,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708499116498</updated>
-      <workItem from="1708499117765" duration="6523000" />
+      <workItem from="1708499117765" duration="19687000" />
     </task>
     <servers />
   </component>
@@ -110,23 +113,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myServer/views/default.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="1" />
+          <line>62</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myServer/views/default.py</url>
-          <line>27</line>
-          <option name="timeStamp" value="3" />
+          <line>86</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myServer/views/default.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/myServer/views/default.py</url>
-          <line>20</line>
-          <option name="timeStamp" value="8" />
+          <line>81</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -139,6 +137,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/myServer$myServer.coverage" NAME="myServer Coverage Results" MODIFIED="1708506039696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/myServer$myServer.coverage" NAME="myServer Coverage Results" MODIFIED="1708594444889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,7 +1,11 @@
+
 from pyramid.view import view_config
 from pyramid.response import Response
 from sqlalchemy.exc import SQLAlchemyError
 
+
+from webargs import fields
+from webargs.pyramidparser import use_args
 from .. import models
 import json
 
@@ -15,21 +19,72 @@ def my_view(request):
     return {'one': one, 'project': 'myServer'}
 
 @view_config(route_name='hello', renderer='json')
-def hello_world(request ):
+def hello_world(request):
     print('Incoming request')
-    data = {"key" : "chris"}
+    params = request.params
+    res1=params.get("id")
+    res2 = params.get("name")
+    flag = params.get("flag")
     data2 = request.json_body
     name = data2.get('name')
-    name=1
     print(name)
-    a=1
-    b=2
-    d=a+b
-    data["d"] = d
+
+    data2["d"] = 123
+    data2["status"] = "ok"
+    data2["s"]="被增加了"
+    data2['params']=res2
+
+    if flag == "1" :
+        return data2
+    if flag == "0" :
+        return data2
+
+
+
+@view_config(route_name='example_route', renderer='json')
+def example_view(request):
+    # 获取查询参数
+    params = request.params
+    param1 = params.get('flag')
+
+    # 获取 JSON 数据
+    json_data = request.json_body
+
+    json_data["name"]= "no_guys"
+    json_data["age"]=123123
+
+    # 做一些处理
+
+
+    # 返回结果
+    return json_data
+
+
+from marshmallow import Schema, fields
+class CreateStoreSchema(Schema):
+    name = fields.Str()
+    age = fields.Int()
+    city = fields.Str()
+
+# 在您的视图文件中引入参数验证规则类，并使用它
+from pyramid.view import view_config
+from webargs.pyramidparser import use_args
+
+
+@view_config(route_name='example_route2', renderer='json')
+@use_args(CreateStoreSchema())
+def post(request, payload):
+    # 在这里使用经过验证的请求参数 args
+    name=payload["name"]
+    city=payload["city"]
+    age=payload["age"]
+
+    data={
+        "name":name,
+        "city":"日本",
+        'age':1203123,
+    }
     return data
-
-
-
 
 
 

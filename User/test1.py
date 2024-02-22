@@ -1,42 +1,10 @@
+people_list = [
+    {"name": "Alice", "age": 30,"status":1},
+    {"name": "Bob", "age": 25,"status":0},
+    {"name": "Charlie", "age": 35 ,"status":1}
+]
 
+# 使用字典推导式将列表转换为字典
+people_dict = {person["name"]: person["age"] for person in people_list if person["status"]}
 
-
-
-def fun(a,b):
-    print("1")
-    return a+b
-
-
-def hello():
-    print("Hello World")
-    print("2")
-
-
-def hell(d):
-
-    print(d)
-    number=d**2 
-    number=number**2
-    number=number**4 
-    return number 
-
-
-def r():
-    print("r")
-    return 2
-
-
-if __name__ == '__main__':
-    while True:
-        fun(2,1,)
-        hello()
-        total=hell(123)
-        print(total)
-        r()
-        mylist=[1,2,3]
-        mylist.append(total)
-
-        print("done")
-        print("start")
-        total=total+1 
-
+print(people_dict)
