@@ -60,11 +60,7 @@ def example_view(request):
     return json_data
 
 
-from marshmallow import Schema, fields
-class CreateStoreSchema(Schema):
-    name = fields.Str()
-    age = fields.Int()
-    city = fields.Str()
+
 
 # 在您的视图文件中引入参数验证规则类，并使用它
 from pyramid.view import view_config
@@ -72,20 +68,17 @@ from webargs.pyramidparser import use_args
 
 
 @view_config(route_name='example_route2', renderer='json')
-@use_args(CreateStoreSchema())
 def post(request, payload):
-    # 在这里使用经过验证的请求参数 args
-    name=payload["name"]
-    city=payload["city"]
-    age=payload["age"]
+
 
     data={
-        "name":name,
+        "name":"data",
         "city":"日本",
         'age':1203123,
     }
     return data
 
+    # 在这
 
 
 

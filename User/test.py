@@ -27,10 +27,11 @@ try :
     auth=("1111","1111")
 
     
-    res = requests.post(url_example_route2,json=json_data)
+    res = requests.get(url_example_route,json=json_data)
+    print(res)
     print(res.json())
 
-    # print(res.text)
+    #print(res.text)
     print(res.url)
     #print(res.json())
     #print(res.headers)
