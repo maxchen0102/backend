@@ -14,40 +14,21 @@ Base = declarative_base()
 engine_url = "postgresql://postgres:postgres@127.0.0.1:5432/test"
 engine = create_engine(engine_url, echo=True)
 
-class Post(Base) :
-    __tablename__="post" 
 
-    post_id=Column(Integer,primary_key=True,autoincrement=True)
-    post_title=Column(String)
-    post_context=Column(String)
-    Owner_id=Column(Integer,ForeignKey("users.id",ondelete="CASCADE"))
-    user=relationship("User")
+class Order(Base):
+    __tablename__ = "order"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    buyer = Column(String)
+    product_id = Column(Integer, ForeignKey("product.id"))  # Corrected ForeignKey definition
 
-class User(Base):
-    __tablename__="users" 
-    
-    id=Column(Integer,autoincrement=True ,primary_key=True) 
-    author=Column(String)  
-    author_email=Column(String)
-    author_password=Column(String)
-    # post=relationship('Post',back_populates='user')
-
-
-class Parent(Base):
-    __tablename__ = "parent_table"
+class Product(Base):
+    __tablename__ = "product"  # Corrected table name
     id = Column(Integer, primary_key=True,autoincrement=True)
-    
-    ill_child=relationship(
-        "Child",
-        primaryjoin="and_(Parent.id==Child.parent_id,Child.illness==1)",
-    )
+    name = Column(String)
+    price = Column(Integer)  # Changed field type to Integer for price
+  
 
-class Child(Base):
-    __tablename__ = "child_table"
-    id = Column(Integer, primary_key=True,autoincrement=True)
-    child_name=Column(String)
-    illness=Column(Integer)
-    parent_id = Column(Integer, ForeignKey("parent_table.id"))
+     
 
 def create_table():
     Base.metadata.create_all(engine)

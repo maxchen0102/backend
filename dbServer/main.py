@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from pprint import pprint
 import  csv 
-from table4 import Post, User,Parent,Child
+from order import Order,Product
 
 
 # # Open the CSV file and read its contents
@@ -28,6 +28,21 @@ from table4 import Post, User,Parent,Child
 
 session = create_session()
 
+# Assuming you have already defined your Product class, session, and engine
+
+# Create a dictionary containing product information
+product_info = {
+    'name': "TOYOTA",
+    'price': 1239000
+}
+# Create a Product instance using the product_info dictionary
+product_1 = Product(**product_info)
+# Add the product instance to the session
+session.add(product_1)
+# Commit the transaction to save the changes to the database
+session.commit()
+# Close the session
+session.close()
 
 
 # user_data_obj={
@@ -35,12 +50,13 @@ session = create_session()
 #     'author_email':'king123@gmail.com',
 #     'author_password':'123asqwe'
 # }
+
+
 # user1=User(**user_data_obj)
 # print(user1.id)
 # session.add(user1) 
 # session.commit()
 # session.close()
-
 
 # post_data_obj={
 #     'post_title':'okok',
@@ -104,12 +120,3 @@ session = create_session()
 # pareant=Parent()
 # session.add(pareant)
 # session.commit()
-
-parents_with_ill_children = session.query(Parent).filter(Parent.ill_child.any()).all()
-for parent in parents_with_ill_children:
-    print("Parent ID:", parent.id)
-    print("Ill Children:")
-    for ill_child in parent.ill_child:
-        print("\tChild ID:", ill_child.id)
-        print("\tChild Name:", ill_child.child_name)
-        print("\tChild Illness:", ill_child.illness)
