@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+version = "0.0"
+name = "newServer"
+authors = []
+description = "NewServer"
+readme = "README.md"
+keywords = ["web", "pyramid", "pylons"]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Framework :: Pyramid",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "plaster_pastedeploy",
+    "pyramid",
+    "pyramid_mako",
+    "pyramid_debugtoolbar",
+    "waitress",
+    "alembic",
+    "pyramid_retry",
+    "pyramid_tm",
+    "SQLAlchemy",
+    "transaction",
+    "zope.sqlalchemy",
+]
+
+[project.optional-dependencies]
+testing = [
+    "WebTest",
+    "pytest",
+    "pytest-cov",
+]
+
+[project.scripts]
+initialize_newServer_db = "newServer.scripts.initialize_db:main"
+
+[project.entry-points."paste.app_factory"]
+main = "newServer:main"
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
+
+[tool.coverage.run]
+source = [
+    "newServer",
+]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+testpaths = [
+    "newServer",
+    "tests",
+]

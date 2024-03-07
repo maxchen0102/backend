@@ -3,20 +3,22 @@ from pyramid.view import view_config
 from pyramid.response import Response
 from sqlalchemy.exc import SQLAlchemyError
 
-
 from webargs import fields
 from webargs.pyramidparser import use_args
 from .. import models
+from ..models.mymodel import create_session 
+from ..models.order_table import Order
 import json
 
-@view_config(route_name='home', renderer='myServer:templates/mytemplate.mako')
-def my_view(request):
-    try:
-        query = request.dbsession.query(models.MyModel)
-        one = query.filter(models.MyModel.name == 'one').one()
-    except SQLAlchemyError:
-        return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'myServer'}
+
+# @view_config(route_name='home', renderer='myServer:templates/mytemplate.mako')
+# def my_view(request):
+#     try:
+#         query = request.dbsession.query(models.MyModel)
+#         one = query.filter(models.MyModel.name == 'one').one()
+#     except SQLAlchemyError:
+#         return Response(db_err_msg, content_type='text/plain', status=500)
+#     return {'one': one, 'project': 'myServer'}
 
 
 def verification(**kw):
@@ -46,7 +48,6 @@ def get(request):
 
 @view_config(route_name='test_post', renderer='json')
 def post(request):
-    
     payload=request.json
     print(type(payload))
     
