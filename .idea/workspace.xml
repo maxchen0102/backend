@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e59dbbd5-a691-4a4b-99ec-e6955a698497" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/User/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/test1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbServer/table_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbServer/table_json.py" afterDir="false" />
-    </list>
+    <list default="true" id="e59dbbd5-a691-4a4b-99ec-e6955a698497" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +10,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2cepj8RaOspIchkQXO2ZNR133C5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,8 +22,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "建立server",
-    "last_opened_file_path": "C:/Users/chris.chen/test1/vue-cli-demo/backend",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/chris.chen/backend",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -47,6 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1708482030497</updated>
       <workItem from="1708482031690" duration="27000" />
+      <workItem from="1709801119701" duration="25000" />
     </task>
     <servers />
   </component>
