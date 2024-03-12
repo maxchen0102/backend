@@ -3,7 +3,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from product.models import Product
-
+from django.forms.models import model_to_dict
 # Create your views here.
 
 
@@ -39,11 +39,17 @@ def api_post(request):
         return JsonResponse({'error': 'Unsupported method'}, status=405)
     
 
-def get_product(request):
-    data=Product.objects.all().values()
-    print(data[0])
-    print("connect success")
-    return JsonResponse(data[0])
+def get_product(request,id):
+    if id :
+        product=Product.objects.get(id=id)
+        data = model_to_dict(product)
+        print(data)
+        return JsonResponse(data)
+    else : 
+        data=Product.objects.all().values()
+        print(data[0])
+        print("connect success")
+        return JsonResponse(data[0])
 
 
 @csrf_exempt
@@ -57,35 +63,35 @@ def add_product(reqeust):
     except : 
         return JsonResponse({'error': 'Invalid JSON data'})
     
-
-def delete_prodcut_by_id(request):
-    data=request.GET.dict()
-    id=data["id"]
-    print(id)
-    try : 
-        product=Product.objects.get(id=id)
-        print(product)
-        product.delete()  
-        return JsonResponse({'status': 'delete success'})
-    except Product.DoesNotExist:
-        return JsonResponse({'error': 'Invalid id '})
+@csrf_exempt
+def delete_prodcut_by_id(request, product_id):
+    if request.method == 'DELETE':
+        try:
+            product = Product.objects.get(id=product_id)
+            product.delete()
+            return JsonResponse({'status': 'success'})
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'no oooooooProduct not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
         
 
 @csrf_exempt
-def update_product(request):
+def product_update(request,id):
     data=json.loads(request.body)
-    id=data["id"]
-    print(id)
     
-    try : 
-        product=Product.objects.get(id=id)
-        
-        product.title=data["title"]
-        product.conttne=data['conttne']
-        product.price=data['price']
-        product.save()
-        
-        
-        return JsonResponse({'status': 'updata success'})
-    except : 
-        return JsonResponse({'error': 'Invalid id '})
+    print(id)
+    if request.method == 'PUT':
+        try : 
+            product=Product.objects.get(id=id)
+            
+            product.title=data["title"]
+            product.conttne=data['conttne']
+            product.price=data['price']
+            product.save()
+            
+            
+            return JsonResponse({'status': 'updata success'})
+        except : 
+            return JsonResponse({'error': 'Invalid id '})
+    return JsonResponse({'error': 'Unsupported HTTP method'}, status=405)

@@ -26,18 +26,17 @@ SECRET_KEY = "django-insecure-4u^=2+4l3oj^*omw)1rd7aw22i81x8kb8e)!t#wl8rffvb=tp8
 DEBUG = True
 
 ALLOWED_HOSTS = []
-#CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
-    "http://localhost:8082",
-    "http://127.0.0.1:9000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8082",
+#     "http://127.0.0.1:9000",
+# ]
 # Application definition
 
 INSTALLED_APPS = [
-   
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

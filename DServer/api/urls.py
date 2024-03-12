@@ -5,7 +5,8 @@ urlpatterns = [
     path("",views.api_home),
     path("api_post",views.api_post),
     path("product",views.get_product),
+    path("product/<int:id>/",views.get_product),
     path("product_add",views.add_product),
-    path("prodcut_delete",views.delete_prodcut_by_id),
-    path("update_product",views.update_product)
+    path("prodcut_delete/<int:product_id>/",views.delete_prodcut_by_id),
+    path("product_update/<int:pk>/update/",views.product_update)
 ]
