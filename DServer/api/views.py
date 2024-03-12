@@ -12,6 +12,7 @@ def api_home(request):
     try :
         params = request.GET.dict()
         print(params)
+        print("connect success")
         
     except:
         pass
@@ -41,6 +42,7 @@ def api_post(request):
 def get_product(request):
     data=Product.objects.all().values()
     print(data[0])
+    print("connect success")
     return JsonResponse(data[0])
 
 
