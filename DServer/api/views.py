@@ -7,51 +7,57 @@ from django.forms.models import model_to_dict
 # Create your views here.
 
 
-def api_home(request): 
+# def api_home(request): 
     
-    try :
-        params = request.GET.dict()
-        print(params)
-        print("connect success")
+#     try :
+#         params = request.GET.dict()
+#         print(params)
+#         print("connect success")
         
-    except:
-        pass
-    print(request.POST)
-    print(request.GET)
+#     except:
+#         pass
+#     print(request.POST)
+#     print(request.GET)
 
     
    
-    return  JsonResponse({"status": "GET success"})
+#     return  JsonResponse({"status": "GET success"})
 
-@csrf_exempt
-def api_post(request):
-    if request.method == 'POST':
-        # Handle POST request with JSON data
-        try:
-            json_data = json.loads(request.body)
-            # Process JSON data here
-            print(json_data)
-            return JsonResponse({'status': 'POST success'})
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
-    else:
-        # Handle other HTTP methods (e.g., GET)
-        return JsonResponse({'error': 'Unsupported method'}, status=405)
+# @csrf_exempt
+# def api_post(request):
+#     if request.method == 'POST':
+#         # Handle POST request with JSON data
+#         try:
+#             json_data = json.loads(request.body)
+#             # Process JSON data here
+#             print(json_data)
+#             return JsonResponse({'status': 'POST success'})
+#         except json.JSONDecodeError:
+#             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+#     else:
+#         # Handle other HTTP methods (e.g., GET)
+#         return JsonResponse({'error': 'Unsupported method'}, status=405)
     
-
+#取得資料by id 
 def get_product(request,id):
     if id :
         product=Product.objects.get(id=id)
         data = model_to_dict(product)
         print(data)
         return JsonResponse(data)
-    else : 
-        data=Product.objects.all().values()
-        print(data[0])
-        print("connect success")
-        return JsonResponse(data[0])
 
+#取得全部資料
+def get_product(request):
+       
+    data=Product.objects.all().values()
+    print(data)
+    final_data={}
+    for item in data :
+        final_data={ item['id']:item  for item in data }
+    print("connect success")
+    return JsonResponse(final_data)
 
+#新增資料
 @csrf_exempt
 def add_product(reqeust): 
     json_data = json.loads(reqeust.body)
@@ -62,7 +68,8 @@ def add_product(reqeust):
         return JsonResponse({'status': 'POST success'})
     except : 
         return JsonResponse({'error': 'Invalid JSON data'})
-    
+
+#刪除資料
 @csrf_exempt
 def delete_prodcut_by_id(request, product_id):
     if request.method == 'DELETE':
@@ -75,7 +82,7 @@ def delete_prodcut_by_id(request, product_id):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
         
-
+#更新資料
 @csrf_exempt
 def product_update(request,id):
     data=json.loads(request.body)

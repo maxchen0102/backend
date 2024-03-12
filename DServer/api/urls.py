@@ -2,8 +2,8 @@ from django.urls import path
 from . import views 
 
 urlpatterns = [
-    path("",views.api_home),
-    path("api_post",views.api_post),
+    # path("",views.api_home),
+    # path("api_post",views.api_post),
     path("product",views.get_product),
     path("product/<int:id>/",views.get_product),
     path("product_add",views.add_product),
