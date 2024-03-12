@@ -40,6 +40,7 @@ from django.forms.models import model_to_dict
     
 #取得資料by id 
 def get_product(request,id):
+    print("this")
     if id :
         product=Product.objects.get(id=id)
         data = model_to_dict(product)
@@ -47,8 +48,8 @@ def get_product(request,id):
         return JsonResponse(data)
 
 #取得全部資料
-def get_product(request):
-       
+def get_all_product(request):
+    print("no2123123132")
     data=Product.objects.all().values()
     print(data)
     final_data={}
@@ -86,17 +87,17 @@ def delete_prodcut_by_id(request, product_id):
 @csrf_exempt
 def product_update(request,id):
     data=json.loads(request.body)
-    
-    print(id)
+    print(data)
+    print("the id is ",id)
+    print(type(id))
     if request.method == 'PUT':
         try : 
-            product=Product.objects.get(id=id)
-            
+            product = Product.objects.get(id=id)
+            print(product)
             product.title=data["title"]
             product.conttne=data['conttne']
             product.price=data['price']
             product.save()
-            
             
             return JsonResponse({'status': 'updata success'})
         except : 
