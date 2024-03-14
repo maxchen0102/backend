@@ -38,7 +38,12 @@ from django.forms.models import model_to_dict
 #         # Handle other HTTP methods (e.g., GET)
 #         return JsonResponse({'error': 'Unsupported method'}, status=405)
     
-#取得資料by id 
+#取得資料by id
+
+
+def test(request):
+    data={"status":"ok"}
+    return JsonResponse(data)
 def get_product(request,id):
     print("this")
     if id :
@@ -87,6 +92,7 @@ def delete_prodcut_by_id(request, product_id):
 @csrf_exempt
 def product_update(request,id):
     data=json.loads(request.body)
+    print(data)
     print(data)
     print("the id is ",id)
     print(type(id))
